@@ -1,0 +1,121 @@
+<div class="col-sm-4 text-center">
+    <% if(avatar.length){ %>
+        <div class="fakeimg_avata">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#choose_avatar">
+            <% if(data_user[0].avatar != '') { %>
+             <img src="<%= data_user[0].avatar %>" alt="image" width="230px" height="225px">
+            <% }%>
+            </button>
+            <!-- Modal -->
+            <div class="modal" id="choose_avatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-lg modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-info" id="exampleModalLabel">View image</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                    </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img class="d-block w-100" src="<%= data_user[0].avatar %>" alt="image" height="400px">
+                                    </div>
+                                    <% if(avatar.length){ 
+                                            for(var j = 0; j < avatar.length;j++) { %>
+                                        <div class="carousel-item">
+                                            <a href="/update_avatar/<%= avatar[j].ID %>">
+                                            <img class="d-block w-100" src="<%= avatar[j].image_update %>" alt="image" height="400px">
+                                            </a>
+                                        </div>
+                                        <% } } else{ %>
+                                            <p>Not found image</p>
+
+                                            <% }; %>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+            <br>
+            <ul class="nav nav-pills flex-column text-center text-info">
+                <li class="nav-item"><br>
+                    <p>Name:
+                        <%= data_user[0].name %>
+                    </p>
+                </li>
+                <li class="nav-item">
+                    <p>Email:
+                        <%= data_user[0].email %>
+                    </p>
+                </li>
+                <li class="nav-item">
+                    <p>Mobile: 0
+                        <%= data_user[0].mobile %>
+                    </p>
+                </li>
+                <li class="nav-item">
+                    <p>Country:
+                        <%= data_user[0].country %>
+                    </p>
+                </li>
+            </ul>
+            <hr class="d-sm-none">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateinfo">
+  Update info
+</button> <br>
+
+            <!-- Modal -->
+            <div class="modal" id="updateinfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="/update_info_personel" method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h6 class="modal-title text-info" id="exampleModalLabel">Update information</h6>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            <div class="modal-body">
+                                <h6 class="modal-title text-left text-danger">Name</h6>
+                                <input type="text" name="name" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                <h6 class="modal-title text-left text-danger">Email</h6>
+                                <input type="email" name="email" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                <h6 class="modal-title text-left text-danger">Password</h6>
+                                <input type="password" name="pass" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                <h6 class="modal-title text-left text-danger">Mobile</h6>
+                                <input type="tel" name="mobile" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                <h6 class="modal-title text-left text-danger">Country</h6>
+                                <input type="text" name="country" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+
+                                <h6 class="modal-title text-left text-danger">File avatar</h6>
+                                <input type="file" name="image_file_avatar" class="form-control-file" id="exampleFormControlFile1">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <hr>
+</div>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./header") %>
+        <title>register</title>
+</head>
+
+<body background="/images/anh_nen.jpg">
+    <form class="form_login" method="POST" action="/signup">
+        <h1>Sign up</h1>
+        <input placeholder="username" type="text" required="" name="Username">
+        <input placeholder="password" type="password" required="" name="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input placeholder="email" type="email" required="" name="Email" autofocus="">
+        <input placeholder="mobile" type="tel" name="Mobile" pattern=".{10,}" title="must ten number">
+        <input placeholder="country" type="text" name="Country" required="">
+        <input type="submit" value="Sign up">
+    </form>
+</body>
+
+</html>

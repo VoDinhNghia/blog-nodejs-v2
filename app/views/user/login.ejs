@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./header") %>
+        <title>Login</title>
+</head>
+
+<body background="/images/anh_nen.jpg">
+    <form class="form_login" method="POST" action="/login-sucsses">
+        <h1>Login</h1>
+        <input placeholder="username" type="text" required="" name="Username">
+        <input placeholder="password" type="password" required="" name="Password">
+        <input type="submit" value="Sign in">
+        <a href="/register">Register acount </a>
+        <span><a href="/forgetpass">Foget password</a></span>
+    </form>
+    <script language="javascript" src="/js/js.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<div class="col-sm-4 text-center">
+    <h5 class="text-danger">Hello:
+        <%- username%>
+    </h5>
+    <ul class="nav nav-pills list-group flex-column">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">List 10 latest posts</a>
+        </li><br>
+        <% if(data_10_post.length){ 
+            for(var i = 0;i < data_10_post.length ;i++) { %>
+            <li class="list-group-item text-left">
+                <a class="bg-gray text-info" href="/info_post/<%= data_10_post[i].ID %>">
+                    <span class="badge text-danger"><%= i+1 %>.</span>
+                    <%= data_10_post[i].title %>
+                        <!-- <span class="badge">(<img src="<%= data_10_post[i].avatar %>" alt="avatar" style="width: 20px; height: 20px; border-radius: 50%;"> <%= data_10_post[i].name %></span>) -->
+                </a>
+            </li>
+            <% } %>
+                <%    } else{ %>
+                    <p>Not found post</p>
+
+                    <% }; %>
+
+
+    </ul>
+    <hr class="d-sm-none">
+</div>

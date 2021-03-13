@@ -1,0 +1,46 @@
+version: "3.2"
+services:
+  nodejs:
+    build: 
+      context: .
+    image: node-app
+    networks:
+      - frontend
+      - backend
+    environment:
+      - MYSQL_HOST=mysql-blog-app
+      - MYSQL_USER=blogApp
+      - MYSQL_PASS=nodejsblog
+      - MYSQL_DB=blog_nodejs
+    volumes:
+      - ./www/:/var/www/html/
+    ports:
+      - "8888:8888"
+    container_name: nodejs-blog-app
+  mysql:
+    image: mysql:5.7
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=blogApp
+      - MYSQL_PASSWORD=nodejsblog
+      - MYSQL_DATABASE=blog_nodejs
+    container_name: mysql-blog-app
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    depends_on:
+      - mysql
+    networks:
+      - backend
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=mysql-blog-app
+      - PMA_PORT=3306
+    volumes:
+      - /sessions
+    container_name: phpmyadmin-blog-app
+networks:
+  frontend:
+  backend:

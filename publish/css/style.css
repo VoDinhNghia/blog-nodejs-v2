@@ -1,0 +1,216 @@
+/* login */
+
+.form_login {
+    background-color: white;
+    box-sizing: border-box;
+    width: 320px;
+    margin: 100px auto 0;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    padding-bottom: 40px;
+    border-radius: 3px;
+}
+
+.form_login h1 {
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+    color: green;
+}
+
+.form_login input {
+    margin: 40px 25px;
+    width: 250px;
+    display: block;
+    border: none;
+    padding: 10px 0;
+    border-bottom: solid 1px #1abc9c;
+    transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+    background-position: -200px 0;
+    background-size: 200px 100%;
+    background-repeat: no-repeat;
+    color: #0e6252;
+}
+
+.form_login input:focus,
+input:valid {
+    box-shadow: none;
+    outline: none;
+    background-position: 0 0;
+}
+
+.form_login input:focus::-webkit-input-placeholder,
+input:valid::-webkit-input-placeholder {
+    color: #1abc9c;
+    font-size: 11px;
+    transform: translateY(-20px);
+    visibility: visible !important;
+}
+
+.form_login input[type="submit"] {
+    width: 78%;
+    padding: 15px;
+    background-color: #1abc9c;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+
+.form_login a {
+    padding: 20px;
+    text-decoration: none;
+    color: red;
+    font-size: 16px;
+}
+
+.form_login a:hover {
+    color: green;
+}
+
+.form_login span {
+    float: right;
+}
+
+
+/* login */
+
+.container {
+    width: 1000px;
+    margin: auto;
+}
+
+
+/* home */
+
+.fakeimg {
+    height: 300px;
+    border: 1px solid blue;
+    border-radius: 10px;
+    background: #aaa;
+    padding: 5px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.fakeimg_avata {
+    height: 250px;
+    border: 1px solid blue;
+    border-radius: 10px;
+    background: #aaa;
+    padding: 5px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.navbar #collapsibleNavbar a {
+    color: white;
+}
+
+.navbar #collapsibleNavbar a:hover {
+    color: blue;
+    font-size: 18px;
+}
+
+
+/* search */
+
+.search-btn {
+    float: right;
+}
+
+.search-btn button:hover {
+    color: red;
+}
+
+.search-btn input {
+    height: 38px;
+    width: 250px;
+    border: 1px solid green;
+    border-radius: 10px;
+}
+
+
+/* comments */
+
+@import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+.comment-widgets {
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.comment-widgets .comment-row {
+    border-bottom: 1px solid transparent;
+    padding: 14px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 10px 0
+}
+
+.p-2 {
+    padding: 0.5rem !important
+}
+
+.comment-text {
+    padding-left: 15px
+}
+
+.w-100 {
+    width: 100% !important
+}
+
+.m-b-15 {
+    margin-bottom: 15px
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.76563rem;
+    line-height: 1.5;
+    border-radius: 1px
+}
+
+.btn-cyan {
+    color: #fff;
+    background-color: #27a9e3;
+    border-color: #27a9e3
+}
+
+.btn-cyan:hover {
+    color: #fff;
+    background-color: #1a93ca;
+    border-color: #198bbe
+}
+
+.comment-widgets .comment-row:hover {
+    background: rgba(0, 0, 0, 0.05)
+}
+
+
+/* comments */
+
+@media screen and (max-width: 900px) {
+    .search-btn {
+        display: none;
+    }
+}
+
+
+/* form new-post */
+
+#form_new_post {
+    border: 1px solid green;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#form_new_post h5 {
+    color: green;
+}
+
+#form_new_post button {
+    width: 200px;
+}
