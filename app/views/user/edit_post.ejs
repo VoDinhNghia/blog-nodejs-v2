@@ -13,6 +13,7 @@
             <div class="row">
                 <%- include("./content_left_personel") %>
                     <div class="col-sm-8">
+                        <br>
                         <form action="/edit_post" method="POST" id="form_new_post" enctype="multipart/form-data">
                             <h5>Privacy</h5>
                             <select id="privacy" class="custom-select" name="privacy">
@@ -32,11 +33,10 @@
                             <h5>Content</h5>
                             <textarea class="form-control" name="content_post" id="exampleFormControlTextarea1" rows="5"><%= data_post[0].content%></textarea>
                             <br>
-                            <h5>File images</h5>
-                            <input type="file" name="image_file" class="form-control-file" id="exampleFormControlFile1">
+                            <input class="form-control form-control text-success" name="image_file" id="formFileSm" type="file" />
                             <input type="text" name="id_post" value="<%= data_post[0].ID%>" style="display: none;">
                             <br>
-                            <button type="submit" class="btn btn-primary">Edit post</button>
+                            <button type="submit" class="btn btn-success">Edit post</button>
                             <a href="/delete_post/<%= data_post[0].ID%>" style="color: white;"><button type="button" class="btn btn-danger float-right">Delete</button></a>
                         </form>
                     </div>

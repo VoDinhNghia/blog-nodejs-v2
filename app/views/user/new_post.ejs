@@ -13,6 +13,7 @@
             <div class="row">
                 <%- include("./content_left_personel") %>
                     <div class="col-sm-8">
+                        <br>
                         <form action="/save_new_post" method="POST" id="form_new_post" enctype="multipart/form-data">
                             <h5>Privacy</h5>
                             <select id="privacy" class="custom-select" name="privacy">
@@ -23,14 +24,14 @@
                             <br><br>
                             <h5>Post Title</h5>
                             <input type="text" name="title_post" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1"><br>
-                            <h5>Content</h5>
-                            <textarea class="form-control" name="content_post" id="exampleFormControlTextarea1" rows="5"></textarea>
+                            <textarea class="form-control" placeholder="write something" name="content_post" id="exampleFormControlTextarea1" rows="5"></textarea>
                             <br>
-                            <h5>File images</h5>
-                            <input type="file" name="image_file" class="form-control-file" id="exampleFormControlFile1">
+                            <input class="form-control form-control text-success" name="image_file" id="formFileSm" type="file" />
                             <br>
-                            <button type="submit" class="btn btn-primary">Submit post</button>
+                            <button type="submit" class="btn btn-success">Submit post</button>
                         </form>
+
+
                     </div>
             </div>
         </div>

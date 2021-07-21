@@ -13,6 +13,7 @@
             <div class="row">
                 <%- include("./content_left") %>
                     <div class="col-sm-8">
+                        <br>
                         <% if(data.length){ 
                             for(var i = 0;i < data.length ;i++) { %>
                             <h5>
@@ -25,13 +26,23 @@
                                 <div class="comment-text w-100">
                                     <h7 class="font-medium text-info">
                                         <span class="text-danger"><%= data[i].date_post %></span>
-                                        <a href="/info_personel/<%= data[i].ID_user %>" class="float-right"><img src="<%= data[i].avatar %>" alt="user" width="25" height="25" class="rounded-circle"> <%= data[i].name %></a>
+                                        <a href="/info_personel/<%= data[i].ID_user %>" class="float-right">
+                                            <% if(data[i].avatar != '') { %>
+                                                <img src="<%= data[i].avatar%>" alt="" width="25" height="25" class="rounded-circle">
+                                                <% }else {
+                                                  if(data[i].gender == 1) {%>
+                                                    <img src="/images/male-avatar.png" alt="" width="25" height="25" class="rounded-circle">
+                                                    <% } else{%>
+                                                        <img src="/images/female-avatar.jpg" alt="" width="25" height="25" class="rounded-circle">
+                                                        <% }}%>
+                                                            <%= data[i].name %>
+                                        </a>
                                     </h7>
                                 </div>
                             </div>
                             <% if(data[i].image != '') {%>
                                 <br>
-                                <div class="fakeimg"><img src="<%= data[i].image %>" alt="image" height="290px"></div>
+                                <div class="fakeimg"><img src="<%= data[i].image %>" alt="image" height="240px"></div>
                                 <br><br>
                                 <% }%>
 
@@ -42,11 +53,18 @@
                                     <span>
                             <div class="btn-group btn-group-sm float-left text-danger" role="group" aria-label="Basic example">
                                 <% var count_like = 0;
+                                   var count_comments = 0; 
                                    for(let j = 0; j < data_s_l_c.length; j++){
                                        if(data_s_l_c[j].ID_post == data[i].ID && data_s_l_c[j].type == 0){
                                            count_like = count_like+1;
                                        }
-                                   } %>
+                                   } 
+                                   for(let c = 0; c < data_s_l_c.length; c++){
+                                       if(data_s_l_c[c].ID_post == data[i].ID && data_s_l_c[c].type == 1){
+                                           count_comments = count_comments+1;
+                                       }
+                                   }
+                                   %>
                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#info_userlike<%= data[i].ID %>">
                                     <%- count_like %> like
                                     </button> <br>
@@ -62,9 +80,19 @@
                     <div class="modal-body">
                         <% for(let j = 0; j < data_s_l_c.length; j++){
                             if(data_s_l_c[j].ID_post == data[i].ID && data_s_l_c[j].type == 0){ %>
-                            <a href="/info_personel/<%= data_s_l_c[j].ID_user %>">
-                                <%= data_s_l_c[j].name %> <br>
-                            </a>
+                            <div class="d-flex flex-row comment-row m-t-0">
+                                <a href="/info_personel/<%= data_s_l_c[j].ID_user %>">
+                                    <% if(data_s_l_c[j].avatar != '') { %>
+                                        <img src="<%= data_s_l_c[j].avatar%>" alt="" width="30" height="30" class="rounded-circle">
+                                        <% }else {
+                                                  if(data_s_l_c[j].gender == 1) {%>
+                                            <img src="/images/male-avatar.png" alt="" width="30" height="30" class="rounded-circle">
+                                            <% } else{%>
+                                                <img src="/images/female-avatar.jpg" alt="" width="30" height="30" class="rounded-circle">
+                                                <% }}%>
+                                                    <span><%= data_s_l_c[j].name %></span>
+                                </a>
+                            </div><br>
                             <%    }
                         } %>
                     </div>
@@ -78,62 +106,81 @@
         </div>
         <div class="btn-group btn-group-sm float-right" role="group" aria-label="Basic example">
             <a href="/like/<%= data[i].ID %>"><button class="btn btn-success mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
-  <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.964.22.817.533 2.512.062 4.51a9.84 9.84 0 0 1 .443-.05c.713-.065 1.669-.072 2.516.21.518.173.994.68 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.162 3.162 0 0 1-.488.9c.054.153.076.313.076.465 0 .306-.089.626-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.826 4.826 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.616.849-.231 1.574-.786 2.132-1.41.56-.626.914-1.279 1.039-1.638.199-.575.356-1.54.428-2.59z"/>
-</svg></button></a>
-            <a href="#"><button class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
-  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
-</svg></button></a>
+            <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.964.22.817.533 2.512.062 4.51a9.84 9.84 0 0 1 .443-.05c.713-.065 1.669-.072 2.516.21.518.173.994.68 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.162 3.162 0 0 1-.488.9c.054.153.076.313.076.465 0 .306-.089.626-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.826 4.826 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.616.849-.231 1.574-.786 2.132-1.41.56-.626.914-1.279 1.039-1.638.199-.575.356-1.54.428-2.59z"/>
+            </svg></button></a>
+            <a href="/share/<%= data[i].ID %>"><button class="btn btn-success mr-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+            <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+            </svg></button></a>
+            <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseExample<%= data[i].ID%>" aria-expanded="false" aria-controls="collapseExample">
+                <%- count_comments %> comments
+            </button>
         </div>
         </span>
         <br><br>
-        <form action="/comments" method="POST">
-            <input type="text" name="id_post" value="<%= data[i].ID %>" style="display: none;">
-            <textarea class="form-control" name="content_comment" id="exampleFormControlTextarea1" rows="2"></textarea>
-            <button type="submit" class="btn btn-success float-right">Comments</button>
-        </form><br><br>
-        <!-- Comment Row -->
-        <% for(let j = 0; j < data_s_l_c.length; j++){
+
+        <div class="collapse" id="collapseExample<%= data[i].ID%>">
+            <div class="card card-body">
+                <form action="/comments" method="POST">
+                    <input type="text" name="id_post" value="<%= data[i].ID %>" style="display: none;">
+                    <textarea class="form-control" name="content_comment" id="exampleFormControlTextarea1" rows="2"></textarea>
+                    <button type="submit" class="btn btn-success float-right">submit</button>
+                </form><br><br>
+                <!-- Comment Row -->
+                <% for(let j = 0; j < data_s_l_c.length; j++){
             if(data_s_l_c[j].ID_post == data[i].ID && data_s_l_c[j].type == 1){ %>
-            <div class="d-flex flex-row comment-row m-t-0">
-                <a href="/info_personel/<%= data_s_l_c[j].ID_user %>">
-                    <div class="p-2"><img src="<%= data_s_l_c[j].avatar %>" alt="user" width="30" height="30" class="rounded-circle"></div>
-                </a>
-                <div class="comment-text w-100">
-                    <h6 class="font-medium text-info">
-
+                    <div class="d-flex flex-row comment-row m-t-0">
                         <a href="/info_personel/<%= data_s_l_c[j].ID_user %>">
-                            <%= data_s_l_c[j].name %>
-                        </a> <span class="text-muted float-right"><%= data_s_l_c[j].date_implement %></span></h6> <span class="m-b-15 d-block"><%= data_s_l_c[j].comment %></span>
+                            <div class="p-2">
+                                <% if(data_s_l_c[j].avatar != '') { %>
+                                    <img src="<%= data_s_l_c[j].avatar%>" alt="" width="30" height="30" class="rounded-circle">
+                                    <% }else {
+                                        if(data_s_l_c[j].gender == 1) {%>
+                                        <img src="/images/male-avatar.png" alt="" width="30" height="30" class="rounded-circle">
+                                        <% } else{%>
+                                            <img src="/images/female-avatar.jpg" alt="" width="30" height="30" class="rounded-circle">
+                                            <% }}%>
+                            </div>
+                        </a>
+                        <div class="comment-text w-100">
+                            <h6 class="font-medium text-info">
 
-                </div>
-            </div>
-            <%    }
+                                <a href="/info_personel/<%= data_s_l_c[j].ID_user %>">
+                                    <%= data_s_l_c[j].name %>
+                                </a> <span class="text-muted float-right"><%= data_s_l_c[j].date_implement %></span></h6> <span class="m-b-15 d-block"><%= data_s_l_c[j].comment %></span>
+
+                        </div>
+                    </div>
+                    <%    }
                         } %>
-                <br>
-                <hr style="border: 1px solid green">
-                <% } } else{ %>
-                    <p>Not found post</p>
+            </div>
+        </div>
 
-                    <% }; %>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <<</a>
-                                </li>
-                                <% for(var i = 0;i< numPages; i++) { %> <span id="p_nextpage">
+
+        <br>
+        <hr style="border: 1px solid green">
+        <% } } else{ %>
+            <p>Not found post</p>
+
+            <% }; %>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#">
+                                <<</a>
+                        </li>
+                        <% for(var i = 0;i< numPages; i++) { %> <span id="p_nextpage">
                                                             <li class="page-item"><a href="/pagination_page/<%= i+1%>" class="page-link">trang <%= i+1%></a>
                                                     </li></span>
 
-                                    <% } %>
-                                        <li class="page-item"><a class="page-link" href="#">>></a></li>
-                            </ul>
-                        </nav>
+                            <% } %>
+                                <li class="page-item"><a class="page-link" href="#">>></a></li>
+                    </ul>
+                </nav>
 
-                        </div>
-                        </div>
-                        </div>
-                        <%- include("./footer") %>
+                </div>
+                </div>
+                </div>
+                <%- include("./footer") %>
 </body>
 
 </html>

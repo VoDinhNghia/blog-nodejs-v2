@@ -11,6 +11,11 @@ exports.query_select = async(table, json_where) => {
     }
 }
 
+exports.query_select_whereNot = async(table, json_where, json_wherenot) => {
+    let arr_value = await knex(table).select().where(json_where).whereNot(json_wherenot);
+    return arr_value;
+}
+
 exports.query_insert = async(table, json_insert) => {
     let arr_value = await knex(table).insert(json_insert);
 }
@@ -33,6 +38,17 @@ exports.query_select_limit = async(table1, table2, id1, id2, json_where, limit, 
     }
 }
 
+exports.query_distinct_select = async(table1, table2, column1, id_table1, id_table2, json_where) => {
+    //let arr_value = await knex(table).distinct().where(json_where);
+    let arr_value = await knex.from(table1).innerJoin(table2, id_table1, id_table2).distinct(column1).where(json_where);
+    return arr_value
+}
+
+exports.query_orwhere_2table = async(table1, table2, id_table1, id_table2, json_where, json_orwhere) => {
+    let join_table = await knex.from(table1).innerJoin(table2, id_table1, id_table2).where(json_where).orWhere(json_orwhere);
+    return join_table
+}
+
 exports.query_count = async(table, json_where) => {
     let count = await knex(table).count({ count: '*' }).where(json_where);
     return count
@@ -49,10 +65,17 @@ exports.join_2_table = async(table1, table2, id_table1, id_table2, json_where) =
 }
 
 exports.join_3_table = async(tb1, tb2, tb3, id_1, id_2, id_3, id_4, json_where, not_where) => {
-    let join_table = await knex.from(tb1).leftJoin(tb2, id_1, id_2)
-        .leftJoin(tb3, id_3, id_4)
-        .where(json_where).whereNot(not_where);
-    return join_table
+    if (not_where == '') {
+        let join_table = await knex.from(tb1).leftJoin(tb2, id_1, id_2)
+            .leftJoin(tb3, id_3, id_4)
+            .where(json_where);
+        return join_table
+    } else {
+        let join_table = await knex.from(tb1).leftJoin(tb2, id_1, id_2)
+            .leftJoin(tb3, id_3, id_4)
+            .where(json_where).whereNot(not_where);
+        return join_table
+    }
 }
 
 exports.query_select_andWhere = async(table, json_where, column, value) => {
@@ -63,4 +86,14 @@ exports.query_select_andWhere = async(table, json_where, column, value) => {
         let arr_value = await knex(table).select().where(column, 'LIKE', '%' + value + '%')
         return arr_value
     }
+}
+
+exports.query_search_date = async(table, json_where, column, value) => {
+    let arr_value = await knex(table).select().where(json_where).andWhere(column, 'LIKE', value + '%')
+    return arr_value
+}
+
+exports.join_2_table_search = async(table1, table2, id_table1, id_table2, json_where, column, value) => {
+    let join_table = await knex.from(table1).innerJoin(table2, id_table1, id_table2).where(json_where).andWhere(column, 'LIKE', value + '%');
+    return join_table
 }

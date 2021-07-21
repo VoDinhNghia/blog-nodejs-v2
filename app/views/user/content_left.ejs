@@ -1,18 +1,47 @@
 <div class="col-sm-4 text-center">
-    <h5 class="text-danger">Hello:
-        <%- username%>
-    </h5>
+    <br>
     <ul class="nav nav-pills list-group flex-column">
         <li class="nav-item">
             <a class="nav-link active" href="#">List 10 latest posts</a>
         </li><br>
         <% if(data_10_post.length){ 
             for(var i = 0;i < data_10_post.length ;i++) { %>
-            <li class="list-group-item text-left">
+            <li class="list-group-item">
                 <a class="bg-gray text-info" href="/info_post/<%= data_10_post[i].ID %>">
-                    <span class="badge text-danger"><%= i+1 %>.</span>
-                    <%= data_10_post[i].title %>
-                        <!-- <span class="badge">(<img src="<%= data_10_post[i].avatar %>" alt="avatar" style="width: 20px; height: 20px; border-radius: 50%;"> <%= data_10_post[i].name %></span>) -->
+                    <span class="badge text-danger float-left"><%= i+1 %>.</span>
+                    <span class="text-center"><%= data_10_post[i].title %></span>
+                    <span class="badge float-right">
+                        <% if(data_10_post[i].avatar != '') { %>
+                            <img src="<%= data_10_post[i].avatar%>" alt="" width="20" height="20" class="rounded-circle">
+                            <span>
+                                <% if(data_10_post[i].status == 0) { %>
+                                    <img src="/images/red_off.png" alt="" width="8" height="8" class="rounded-circle">
+                                    <% }else { %>
+                                     <img src="/images/green_act.png" alt="" width="8" height="8" class="rounded-circle">
+                                        <% }%>
+                            </span>
+                    <% }else {
+                                if(data_10_post[i].gender == 1) {%>
+                        <img src="/images/male-avatar.png" alt="" width="20" height="20" class="rounded-circle">
+                        <span>
+                                <% if(data_10_post[i].status == 0) { %>
+                                    <img src="/images/red_off.png" alt="" width="8" height="8" class="rounded-circle">
+                                    <% }else { %>
+                                     <img src="/images/green_act.png" alt="" width="8" height="8" class="rounded-circle">
+                                        <% }%>
+                            </span>
+                        <% } else{%>
+                            <img src="/images/female-avatar.jpg" alt="" width="20" height="20" class="rounded-circle">
+                            <span>
+                                <% if(data_10_post[i].status == 0) { %>
+                                    <img src="/images/red_off.png" alt="" width="8" height="8" class="rounded-circle">
+                                    <% }else { %>
+                                     <img src="/images/green_act.png" alt="" width="8" height="8" class="rounded-circle">
+                                        <% }%>
+                            </span>
+                            <% }}%>
+                                </span>
+
                 </a>
             </li>
             <% } %>
@@ -23,5 +52,19 @@
 
 
     </ul>
-    <hr class="d-sm-none">
+    <hr class="d-sm-none"><br>
+    <ul class="nav nav-pills list-group flex-column">
+        <li class="nav-item active">
+            <a class="nav-link active" href="">Search date</a>
+        </li><br>
+        <li>
+            <form action="/search_date" method="POST">
+                <div class="row">
+                    <input type="date" name="search_date" max="3000-12-31" min="2020-01-01" class="form-control w-75">
+                    <button type="submit" class="btn btn-outline-success bg-white">Search</button>
+                </div>
+            </form>
+        </li>
+    </ul>
+
 </div>

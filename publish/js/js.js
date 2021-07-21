@@ -19,5 +19,3 @@ function messFuction() {
         return false;
     }
 }
-
-//home
